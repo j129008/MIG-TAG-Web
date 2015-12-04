@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>MIG 線上標記</title>
+    </head>
+    <style>
+    body {padding:20px;}
+
+    #myTa {
+      border:1px solid black;
+      padding:5px;
+      width:100%;
+      height:200px;
+      margin:10px auto;
+    }
+
+    button {padding:5px 10px;}
+    </style>
+
+    <script src="https://code.jquery.com/jquery-1.7.2.js"></script>
+    <script>
+
+    function wrapText(elementID, openTag, closeTag) {
+        var textArea = $('#' + elementID);
+        var len = textArea.val().length;
+        var start = textArea[0].selectionStart;
+        var end = textArea[0].selectionEnd;
+        var selectedText = textArea.val().substring(start, end);
+        var replacement = openTag + selectedText + closeTag;
+        textArea.val(textArea.val().substring(0, start) + replacement + textArea.val().substring(end, len));
+    }
+
+    $(document).ready(function(){
+        $('#book').click(function() {
+            wrapText("myTa", "<book>", "</book>");
+        });
+        $('#name').click(function() {
+            wrapText("myTa", "<name>", "</name>");
+        });
+        $('#job').click(function() {
+            wrapText("myTa", "<job>", "</job>");
+        });
+        $('#age').click(function() {
+            wrapText("myTa", "<age>", "</age>");
+        });
+    });
+
+    </script>
+
+    <body>
+        <textarea id="myTa">MIG標記工具, 請反白文字後, 再用下面的按鈕做tag的動作</textarea>
+
+        <button id="book">book</button>
+        <button id="name">name</button>
+        <button id="job">job</button>
+        <button id="age">age</button>
+    </body>
+</html>
